@@ -99,3 +99,14 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# pycharm
+.idea/*
+
+# VirtualEnv
+bin/*
+lib/*
+share/*
+
+# BeerBoss
+settings.py

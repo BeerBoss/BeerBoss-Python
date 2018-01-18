@@ -1,0 +1,18 @@
+# Database settings
+db_host = ''
+db_user = ''
+db_user_password = ''
+db_database = ''
+
+# Cooler settings
+cooler_relayPin =
+
+# Heater settings
+heater_relayPin =
+
+# Lcd settings
+lcd_i2c_addr =
+
+# Sensor settings
+sensorFridgePin =
+sensorBarrelPin =
