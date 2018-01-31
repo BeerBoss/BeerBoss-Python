@@ -1,5 +1,5 @@
 # Imports
-from classes.lcd import Lcd
+from classes.display import Display
 from classes.relay import Relay
 from classes.sensor import Sensor
 from classes.web import Web
@@ -11,12 +11,12 @@ import time
 class Logic(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
-        self.lcd = Lcd(settings.lcd_i2c_addr)
+        self.display = Display(settings.lcd_i2c_addr)
         self.cooler = Relay(settings.cooler_relayPin)
         self.heater = Relay(settings.heater_relayPin)
-        self.sensorFridge = Sensor(settings.sensorFridgePin)
-        self.sensorBarrel = Sensor(settings.sensorBarrelPin)
-        self.web = Web(settings.webAddress, settings.email, settings.password)
+        self.sensorFridge = Sensor(settings.sensorFridgeAddress)
+        self.sensorBarrel = Sensor(settings.sensorBarrelAddress)
+        #self.web = Web(settings.webAddress, settings.email, settings.password)
         self.action = Action.NOTHING
         self.processingData = []
 
@@ -26,7 +26,7 @@ class Logic(threading.Thread):
         self.sensorFridge.stopRecording()
         self.sensorBarrel.stopRecording()
         del self.web
-        del self.lcd
+        del self.display
 
     def submitData(self):
         self.web.submitData(self.sensorFridge.currentTemp, self.sensorBarrel.currentTemp, self.cooler.relayState.value, self.heater.relayState.value)
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     logic = Logic()
     try:
         while(1):
-            logic.submitData()
+            logic.display.print(logic.sensorBarrel.currentTemp)
             time.sleep(5)
     except KeyboardInterrupt:
         del logic

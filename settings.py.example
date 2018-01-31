@@ -4,7 +4,7 @@ cooler_relayPin =
 # Heater settings
 heater_relayPin =
 
-# Lcd settings
+# Display settings
 lcd_i2c_addr =
 
 # Sensor settings

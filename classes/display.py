@@ -1,7 +1,7 @@
 # Imports
 
-class Lcd:
-    class __Lcd:
+class Display:
+    class __Display:
         def __init__(self, i2c_addr):
             self.I2C_addr = i2c_addr
 
@@ -15,6 +15,6 @@ class Lcd:
     instance = None
 
     def __new__(cls, i2c_addr = None):  # __new__ always a classmethod
-        if not Lcd.instance:
-            Lcd.instance = Lcd.__Lcd(i2c_addr)
-        return Lcd.instance
+        if not Display.instance:
+            Display.instance = Display.__Display(i2c_addr)
+        return Display.instance
