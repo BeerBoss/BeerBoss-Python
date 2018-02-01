@@ -42,6 +42,10 @@ class Logic(threading.Thread):
             elif barrelTemp > desiredTemp:
                 self.action = Action.COOl
 
+    def executeAction(self):
+        self.cooler.setstate(self.action.value[0])
+        self.heater.setstate(self.action.value[1])
+
 
 
 if __name__ == "__main__":
@@ -50,7 +54,8 @@ if __name__ == "__main__":
         while 1:
             logic.submitData()
             logic.decideAction()
-            print(logic.action)
+            logic.executeAction()
+            print(logic.action.value)
             time.sleep(5)
     except KeyboardInterrupt:
         del logic
