@@ -40,7 +40,7 @@ class Logic(threading.Thread):
             if barrelTemp < desiredTemp:
                 self.action = Action.HEAT
             elif barrelTemp > desiredTemp:
-                self.action = Action.COOl
+                self.action = Action.COOL
 
     def executeAction(self):
         self.cooler.setstate(self.action.value[0])

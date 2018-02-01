@@ -2,8 +2,8 @@ from enum import Enum
 
 
 class RelayState(Enum):
-    OFF = False
-    ON = True
+    OFF = True
+    ON = False
 
 class Action(Enum):
     COOL = [RelayState.ON, RelayState.OFF]
