@@ -13,7 +13,6 @@ class Relay:
         self.relayState = RelayState.OFF
 
     def __del__(self):
-        self.turnoff()
         self.display.print("Relaycontrol for pin {} has been stopped. Pin has been turned off".format(self.relayPin))
         GPIO.cleanup()
 
