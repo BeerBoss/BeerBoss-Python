@@ -17,7 +17,10 @@ class Web:
         self.display.print("Web contact has been terminated!")
 
     def getDesiredTemp(self):
-        return self.data.desiredTemp
+        if self.data:
+            return self.data.desiredTemp
+        else:
+            return None
 
     def submitData(self, fridgeTemp, barrelTemp, coolerState, heaterState):
         if fridgeTemp is not None and barrelTemp is not None:

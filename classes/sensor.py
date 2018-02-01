@@ -3,8 +3,6 @@ import threading
 import os
 import time
 import random
-os.system('modprobe w1-gpio')
-os.system('modprobe w1-therm')
 from .display import Display
 
 class Sensor(threading.Thread):
