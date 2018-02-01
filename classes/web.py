@@ -3,13 +3,16 @@ import requests
 import json
 import os
 from .display import Display
+from .storage import Storage
 
 sysinfo = os.uname()
+
 class Web:
     def __init__(self, webaddr, email, password):
         self.display = Display()
         self.webAddress = webaddr
-        self.data = None
+        self.storage = Storage('storage.json')
+        self.data = self.storage.readData()
         self.auth = (email, password)
         self.osInfo = {'os': sysinfo.sysname, 'os_version': sysinfo.release, 'architecture': sysinfo.machine, 'hostname': sysinfo.nodename}
 
@@ -29,6 +32,7 @@ class Web:
                 data = requests.post(self.webAddress + '/api/sensordata', json=data, auth=self.auth)
                 if data.text:
                     self.data = json.loads(data.text)
+                    self.storage.writeData(self.data)
                 return 1
             except requests.ConnectionError as e:
                 print("Request failed because I could not connect to the server")

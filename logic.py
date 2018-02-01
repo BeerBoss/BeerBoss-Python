@@ -55,7 +55,6 @@ if __name__ == "__main__":
             logic.submitData()
             logic.decideAction()
             logic.executeAction()
-            print(logic.action.value)
             time.sleep(5)
     except KeyboardInterrupt:
         del logic

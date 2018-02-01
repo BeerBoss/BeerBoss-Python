@@ -1,9 +1,11 @@
 from enum import Enum
 
 
+# States are inverted because of the bidirectional level shifter
 class RelayState(Enum):
     OFF = True
     ON = False
+
 
 class Action(Enum):
     COOL = [RelayState.ON, RelayState.OFF]
