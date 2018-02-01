@@ -18,7 +18,7 @@ class Web:
 
     def getDesiredTemp(self):
         if self.data:
-            return self.data.desiredTemp
+            return self.data['desiredTemp']
         else:
             return None
 
@@ -26,9 +26,9 @@ class Web:
         if fridgeTemp is not None and barrelTemp is not None:
             data = {"tempData": {"fridgeTemp": round(fridgeTemp, 2), "barrelTemp": round(barrelTemp, 2), "cooler": coolerState, "heater": heaterState}, "connData": self.osInfo}
             try:
-                data = json.loads(requests.post(self.webAddress + '/api/sensordata', json=data, auth=self.auth).text)
+                data = requests.post(self.webAddress + '/api/sensordata', json=data, auth=self.auth)
                 if data:
-                    self.data = data
+                    self.data = json.loads(data.text)
                 return 1
             except requests.ConnectionError as e:
                 print("Request failed because I could not connect to the server")
