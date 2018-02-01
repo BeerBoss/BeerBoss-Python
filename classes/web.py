@@ -26,7 +26,7 @@ class Web:
         if fridgeTemp is not None and barrelTemp is not None:
             data = {"tempData": {"fridgeTemp": round(fridgeTemp, 2), "barrelTemp": round(barrelTemp, 2), "cooler": coolerState, "heater": heaterState}, "connData": self.osInfo}
             try:
-                data = json.loads(requests.post(self.webAddress + '/api/sensordata', json=data, auth=self.auth))
+                data = json.loads(requests.post(self.webAddress + '/api/sensordata', json=data, auth=self.auth).text)
                 if data:
                     self.data = data
                 return 1
