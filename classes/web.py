@@ -18,7 +18,7 @@ class Web:
 
     def getDesiredTemp(self):
         if self.data:
-            return self.data['desiredTemp']
+            return float(self.data['desiredTemp'])
         else:
             return None
 

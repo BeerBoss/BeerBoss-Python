@@ -34,7 +34,7 @@ class Logic(threading.Thread):
     def decideAction(self):
         desiredTemp = self.web.getDesiredTemp()
         barrelTemp = self.sensorBarrel.currentTemp
-        fridgeTemp = float(self.sensorFridge.currentTemp)
+        fridgeTemp = self.sensorFridge.currentTemp
 
         if barrelTemp and fridgeTemp and desiredTemp:
             if barrelTemp < desiredTemp:
