@@ -36,10 +36,11 @@ class Logic(threading.Thread):
         barrelTemp = self.sensorBarrel.currentTemp
         fridgeTemp = self.sensorFridge.currentTemp
 
-        if barrelTemp < desiredTemp:
-            self.action = Action.HEAT
-        elif barrelTemp > desiredTemp:
-            self.action = Action.COOl
+        if barrelTemp and fridgeTemp and desiredTemp:
+            if barrelTemp < desiredTemp:
+                self.action = Action.HEAT
+            elif barrelTemp > desiredTemp:
+                self.action = Action.COOl
 
 
 
