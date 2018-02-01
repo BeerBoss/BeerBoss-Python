@@ -10,7 +10,7 @@ from .display import Display
 class Sensor(threading.Thread):
     def __init__(self, busaddr):
         threading.Thread.__init__(self)
-        self.sensor = 'sys/bus/w1/devices/'+ busaddr + '/w1_slave'
+        self.sensor = '/sys/bus/w1/devices/'+ busaddr + '/w1_slave'
         self.display = Display()
         self.currentTemp = None
         self.previousTemp = None

@@ -16,7 +16,7 @@ class Logic(threading.Thread):
         self.heater = Relay(settings.heater_relayPin)
         self.sensorFridge = Sensor(settings.sensorFridgeAddress)
         self.sensorBarrel = Sensor(settings.sensorBarrelAddress)
-        #self.web = Web(settings.webAddress, settings.email, settings.password)
+        self.web = Web(settings.webAddress, settings.email, settings.password)
         self.action = Action.NOTHING
         self.processingData = []
 
@@ -35,8 +35,9 @@ class Logic(threading.Thread):
 if __name__ == "__main__":
     logic = Logic()
     try:
-        while(1):
-            logic.display.print(logic.sensorBarrel.currentTemp)
+        while 1:
+            logic.submitData()
+            print(logic.web.getDesiredTemp())
             time.sleep(5)
     except KeyboardInterrupt:
         del logic

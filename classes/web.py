@@ -16,16 +16,17 @@ class Web:
     def __del__(self):
         self.display.print("Web contact has been terminated!")
 
-
-    def getData(self):
-        request = requests.get(self.webAddress)
-        self.data = json.loads(request.json())
+    def getDesiredTemp(self):
+        return self.data.desiredTemp
 
     def submitData(self, fridgeTemp, barrelTemp, coolerState, heaterState):
         if fridgeTemp is not None and barrelTemp is not None:
             data = {"tempData": {"fridgeTemp": round(fridgeTemp, 2), "barrelTemp": round(barrelTemp, 2), "cooler": coolerState, "heater": heaterState}, "connData": self.osInfo}
             try:
-                r= requests.post(self.webAddress + '/api/sensordata', json=data, auth=self.auth)
-                print(r.content)
-            except (requests.ConnectionError) as e:
+                data = json.loads(requests.post(self.webAddress + '/api/sensordata', json=data, auth=self.auth))
+                if data:
+                    self.data = data
+                return 1
+            except requests.ConnectionError as e:
                 print("Request failed because I could not connect to the server")
+                return 0
