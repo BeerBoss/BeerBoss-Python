@@ -27,7 +27,7 @@ class Web:
             data = {"tempData": {"fridgeTemp": round(fridgeTemp, 2), "barrelTemp": round(barrelTemp, 2), "cooler": coolerState, "heater": heaterState}, "connData": self.osInfo}
             try:
                 data = requests.post(self.webAddress + '/api/sensordata', json=data, auth=self.auth)
-                if data:
+                if data.text:
                     self.data = json.loads(data.text)
                 return 1
             except requests.ConnectionError as e:

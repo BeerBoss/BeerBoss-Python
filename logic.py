@@ -31,13 +31,25 @@ class Logic(threading.Thread):
     def submitData(self):
         self.web.submitData(self.sensorFridge.currentTemp, self.sensorBarrel.currentTemp, self.cooler.relayState.value, self.heater.relayState.value)
 
+    def decideAction(self):
+        desiredTemp = self.web.getDesiredTemp()
+        barrelTemp = self.sensorBarrel.currentTemp
+        fridgeTemp = self.sensorFridge.currentTemp
+
+        if barrelTemp < desiredTemp:
+            self.action = Action.HEAT
+        elif barrelTemp > desiredTemp:
+            self.action = Action.COOl
+
+
 
 if __name__ == "__main__":
     logic = Logic()
     try:
         while 1:
             logic.submitData()
-            print(logic.web.getDesiredTemp())
+            logic.decideAction()
+            print(logic.action)
             time.sleep(5)
     except KeyboardInterrupt:
         del logic
