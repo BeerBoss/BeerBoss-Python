@@ -46,7 +46,7 @@ class Lcd:
         time.sleep(E_DELAY)
         self.bus.write_byte(self.i2c_addr, (bits | ENABLE))
         time.sleep(E_PULSE)
-        self.bus.write_byte(self.i2c_addr (bits & ~ENABLE))
+        self.bus.write_byte(self.i2c_addr, (bits & ~ENABLE))
         time.sleep(E_DELAY)
 
     def lcd_string(self, message, line):
