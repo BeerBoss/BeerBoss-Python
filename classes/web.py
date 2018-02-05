@@ -31,9 +31,13 @@ class Web:
             try:
                 data = requests.post(self.webAddress + '/api/sensordata', json=data, auth=self.auth)
                 if data.text:
-                    self.data = json.loads(data.text)
-                    self.storage.writeData(self.data)
-                    self.display.lcd_print("Conn: Yes, Temp: {}".format(self.data['desiredTemp']), 4)
+                    try:
+                        self.data = json.loads(data.text)
+                        self.storage.writeData(self.data)
+                        self.display.lcd_print("Conn: Yes Temp: {}".format(self.data['desiredTemp']), 4)
+                    except ValueError as e:
+                        self.display.lcd_print("Conn: No Temp: {}".format(self.data['desiredTemp']), 4)
+
             except requests.ConnectionError as e:
                 print("Request failed because I could not connect to the server")
-                self.display.lcd_print("Conn: No, Temp: {}".format(self.data['desiredTemp']), 4)
+                self.display.lcd_print("Conn: No Temp: {}".format(self.data['desiredTemp']), 4)
