@@ -47,8 +47,10 @@ class Logic(threading.Thread):
         self.heater.setstate(self.action.value[1])
 
     def generateLcdText(self):
-        tempLine = ("F: {}{} B: {}{}".format(self.sensorFridge.currentTemp, chr(176), self.sensorBarrel.currentTemp, chr(176)))
+        tempLine = ("F: {} B: {}".format(self.sensorFridge.currentTemp, self.sensorBarrel.currentTemp))
+        statusLine = ("Status: {}".format(self.action.name))
         self.display.lcd_print(tempLine, 2)
+        self.display.lcd_print(statusLine, 3)
 
 
 

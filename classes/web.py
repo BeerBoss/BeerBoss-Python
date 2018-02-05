@@ -33,7 +33,7 @@ class Web:
                 if data.text:
                     self.data = json.loads(data.text)
                     self.storage.writeData(self.data)
-                return 1
+                    self.display.lcd_print("Conn: Yes, Temp: {}".format(self.data.desiredTemp), 4)
             except requests.ConnectionError as e:
                 print("Request failed because I could not connect to the server")
-                return 0
+                self.display.lcd_print("Conn: No, Temp: {}".format(self.data.desiredTemp), 4)
