@@ -69,7 +69,6 @@ class Display:
         def print(self, text):
             print(text)
 
-        def lcd_print(self):
 
 
     instance = None
