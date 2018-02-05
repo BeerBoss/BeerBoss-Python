@@ -46,6 +46,10 @@ class Logic(threading.Thread):
         self.cooler.setstate(self.action.value[0])
         self.heater.setstate(self.action.value[1])
 
+    def generateLcdText(self):
+        tempLine = ("F: {}{} B: {}{}".format(self.sensorFridge.currentTemp, chr(176), self.sensorBarrel.currentTemp, chr(176)))
+        self.display.lcd_print(tempLine, 2)
+
 
 
 if __name__ == "__main__":
@@ -55,6 +59,7 @@ if __name__ == "__main__":
             logic.submitData()
             logic.decideAction()
             logic.executeAction()
+            logic.generateLcdText()
             time.sleep(5)
     except KeyboardInterrupt:
         del logic
